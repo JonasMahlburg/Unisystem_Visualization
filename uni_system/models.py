@@ -9,7 +9,7 @@ class Semester(models.Model):
     
 
 class Prof(models.Model):
-    name = models.CharField(max_lenght=30)
+    name = models.CharField(max_length=30)
    
     def __str__(self):
         return self.name
@@ -23,7 +23,7 @@ class Student(models.Model):
 
 
 class Course_Description(models.Model):
-    description = models.CharField(max_lenght=300)
+    description = models.CharField(max_length=300)
     
     def __str__(self):
         return f"This course is about: {self.description}"
@@ -39,10 +39,10 @@ class Student_ID(models.Model):
 
 
 class Course(models.Model):
-    title = models.CharField(max_lenght=50)
-    description = models.OneToOneField(Course_Description, on_delete= models.CASCADE, related_name='course')
+    title = models.CharField(max_length=50)
+    description = models.OneToOneField(Course_Description, on_delete= models.SET_NULL, null=True, related_name='course')
     semester = models.ForeignKey(Semester, on_delete= models.CASCADE, related_name='course')
-    professor = models.ForeignKey(Prof, on_delete= models.CASCADE, related_name='course' )
+    professor = models.ForeignKey(Prof, on_delete= models.SET_NULL, null=True, related_name='course' )
 
     def __str__(self):
         return f"{self.title}, {self.semester}"
